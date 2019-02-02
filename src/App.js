@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
+import UserInput from './UserInput/UserInput';
+import UserOutput from './UserOutput/UserOutput';
+
 
 class App extends Component {
   state = {
@@ -10,6 +13,7 @@ class App extends Component {
       { name: 'Jake', age: 9 },
       { name: 'Gabe', age: 9000 }
     ],
+    userName: 'Prozak94',
     otherState: 'lorem ipsum'
   }
 
@@ -31,6 +35,12 @@ class App extends Component {
         { name: event.target.value, age: 9 },
         { name: 'Gabe', age: 10000 }
       ]
+    })
+  }
+
+  usernameChangedHandler = (event) => {
+    this.setState({
+      userName: event.target.value
     })
   }
 
@@ -63,6 +73,16 @@ class App extends Component {
         <Person 
           name={this.state.persons[2].name} 
           age={this.state.persons[2].age}/>
+
+        <div>
+          <UserInput 
+          changed={this.usernameChangedHandler}
+          currentName={this.state.userName}/>
+        </div>
+
+        <UserOutput userName={this.state.userName}/>
+        <UserOutput userName="JacobsCreek"/>
+        <UserOutput userName="Prozak"/>
       </div>
     ); 
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'React createElement works!'))
