@@ -14,7 +14,8 @@ class App extends Component {
       { name: 'Gabe', age: 9000 }
     ],
     userName: 'Prozak94',
-    otherState: 'lorem ipsum'
+    otherState: 'lorem ipsum',
+    showPersons: false
   }
 
   switchNameHandler = ( newName ) => {
@@ -38,6 +39,11 @@ class App extends Component {
     })
   }
 
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
   usernameChangedHandler = (event) => {
     this.setState({
       userName: event.target.value
@@ -57,22 +63,28 @@ class App extends Component {
       <div className="App">
         <h1>Hi, is this working?</h1>
         <button
-        style={style}
-          onClick={() => this.switchNameHandler('ZDH All Da Way')}>
-          Switch Name
+          style={style}
+          onClick={this.togglePersonHandler}>
+          Toggle People
         </button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}/>
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Jakey Boy!')}
-          changed={this.nameChangedHandler}>
-          My Hobbies: MMA</Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}/>
+
+        { this.state.showPersons === true ? 
+          <div>
+            <Person 
+              name={this.state.persons[0].name} 
+              age={this.state.persons[0].age}/>
+            <Person 
+              name={this.state.persons[1].name} 
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, 'Jakey Boy!')}
+              changed={this.nameChangedHandler}>
+              My Hobbies: MMA</Person>
+            <Person 
+              name={this.state.persons[2].name} 
+              age={this.state.persons[2].age}/>
+          </div> : null
+        }
+
 
         <div>
           <UserInput 
