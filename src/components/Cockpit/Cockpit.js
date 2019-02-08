@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './Cockpit.module.css';
+import Aux from '../../hoc/Aux';
 
 const cockpit = (props) => {
     const assignedClasses = [];
-    let btnClass = '';
+    let btnClass = styles.Button;
     if (props.showPersons) {
-        btnClass = styles.Red;
+        btnClass = [styles.Button, styles.Red].join(' ');
     }
 
     if (props.persons.length <= 2) {
@@ -16,7 +17,7 @@ const cockpit = (props) => {
     }
 
     return (
-        <div className={styles.Cockpit}>
+        <Aux>        
             <h1>{ props.appTitle }</h1>
             <p className={assignedClasses.join(' ')}>Yes, it seems so.</p>
             <button
@@ -24,7 +25,7 @@ const cockpit = (props) => {
                 onClick={props.clicked}>
                 Toggle People
             </button>
-        </div>
+        </Aux>
     );
 };
 
